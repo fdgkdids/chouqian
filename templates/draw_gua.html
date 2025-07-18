@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抽签结果</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-image: url('{{ url_for("static", filename="zhouyi.jpg") }}');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            color: #FF0000;
+            text-align: center;
+            padding: 24px;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            color: #000;
+            margin: 0;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #000;
+            background-color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .button:hover {
+            background-color: #333;
+        }
+
+        .animation {
+            display: none; /* 默认隐藏动画 */
+            margin: 20px 0;
+        }
+
+        .result {
+            display: none; /* 默认隐藏结果 */
+        }
+
+        /* 隐藏音频控件 */
+        #background-audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>抽签结果</h1>
+
+    <!-- 抽签动画 -->
+    <div class="animation" id="animation">
+        <video autoplay>
+            <source src="{{ url_for('static', filename='video.mp4') }}" type="video/mp4">
+            您的浏览器不支持视频播放。
+        </video>
+    </div>
+
+    <!-- 抽签结果 -->
+    <div class="result" id="result">
+        <p>抽到的签是第{{ sign.number }}签：{{ sign.name }}（{{ sign.sign }}）</p>
+        <p>签文：{{ sign.text }}</p>
+        <p>解释：{{ sign.explanation }}</p>
+    </div>
+
+    <a href="/" class="button">返回主页</a>
+
+    <!-- 背景音频 -->
+    <audio id="background-audio" loop autoplay>
+        <source src="{{ url_for('static', filename='audio.mp4') }}" type="audio/mp4">
+        您的浏览器不支持音频播放。
+    </audio>
+
+    <script>
+        // 显示动画
+        const animation = document.getElementById('animation');
+        const result = document.getElementById('result');
+
+        // 默认显示动画，3 秒后显示结果
+        animation.style.display = 'block';
+        setTimeout(() => {
+            animation.style.display = 'none';
+            result.style.display = 'block';
+        }, 7500); // 3 秒后隐藏动画并显示结果
+    </script>
+</body>
+</html>
