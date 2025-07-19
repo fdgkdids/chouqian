@@ -1,3 +1,4 @@
+      
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,7 +65,8 @@
 
     <!-- 抽签动画 -->
     <div class="animation" id="animation">
-        <video autoplay>
+        <!-- 主要修改：添加 muted 和 playsinline 属性以确保自动播放 -->
+        <video autoplay muted playsinline>
             <source src="{{ url_for('static', filename='video.mp4') }}" type="video/mp4">
             您的浏览器不支持视频播放。
         </video>
@@ -90,12 +92,14 @@
         const animation = document.getElementById('animation');
         const result = document.getElementById('result');
 
-        // 默认显示动画，3 秒后显示结果
+        // 默认显示动画，7.5 秒后显示结果
         animation.style.display = 'block';
         setTimeout(() => {
             animation.style.display = 'none';
             result.style.display = 'block';
-        }, 7500); // 3 秒后隐藏动画并显示结果
+        }, 7500); // 7.5 秒后隐藏动画并显示结果
     </script>
 </body>
 </html>
+
+    
